@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" width="1000" height="680" style="background: #090d16; font-family: 'Segoe UI', Inter, sans-serif;">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+
+    <linearGradient id="appGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#171d36" />
+    </linearGradient>
+
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#818cf8" />
+    </marker>
+
+    <marker id="arrowCallback" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8" />
+    </marker>
+  </defs>
+
+  <!-- Title Banner -->
+  <text x="500" y="45" fill="#f8fafc" font-size="22" font-weight="bold" text-anchor="middle" letter-spacing="0.5">
+    Схема компонентів застосунку та потік даних (React Props)
+  </text>
+  <text x="500" y="72" fill="#94a3b8" font-size="13" text-anchor="middle">
+    Практична робота: Компоненти та властивості (props) • Курс 3
+  </text>
+
+  <!-- Legend -->
+  <g transform="translate(620, 85)">
+    <line x1="0" y1="12" x2="30" y2="12" stroke="#818cf8" stroke-width="2.5" marker-end="url(#arrow)" />
+    <text x="38" y="16" fill="#cbd5e1" font-size="11.5">props (зверху вниз)</text>
+    <line x1="170" y1="12" x2="200" y2="12" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowCallback)" />
+    <text x="208" y="16" fill="#cbd5e1" font-size="11.5">callback props (події вгору)</text>
+  </g>
+
+  <!-- Main Container: App -->
+  <g filter="url(#shadow)">
+    <rect x="250" y="115" width="500" height="175" rx="14" fill="url(#appGrad)" stroke="#4338ca" stroke-width="2" />
+    
+    <!-- App Header -->
+    <rect x="250" y="115" width="500" height="38" rx="14" fill="#312e81" />
+    <rect x="250" y="140" width="500" height="13" fill="#312e81" />
+    <text x="500" y="141" fill="#ffffff" font-size="16" font-weight="bold" text-anchor="middle">
+      Головний компонент: &lt;App /&gt;
+    </text>
+
+    <!-- App State Details -->
+    <text x="270" y="175" fill="#38bdf8" font-size="13" font-weight="bold">Внутрішній стан (State):</text>
+    <text x="285" y="196" fill="#e2e8f0" font-size="12">• <tspan fill="#a5b4fc">courses</tspan>: масив об'єктів курсів [{ id, title, instructor, duration, isAvailable... }]</text>
+    <text x="285" y="216" fill="#e2e8f0" font-size="12">• <tspan fill="#a5b4fc">filter</tspan>: 'all' | 'available' | 'closed'</text>
+    <text x="285" y="236" fill="#e2e8f0" font-size="12">• <tspan fill="#a5b4fc">searchQuery</tspan>: рядок пошуку за назвою/викладачем</text>
+    <text x="285" y="256" fill="#e2e8f0" font-size="12">• <tspan fill="#a5b4fc">isModalOpen</tspan>: логічний стан модального вікна додавання курсу</text>
+    <text x="285" y="276" fill="#34d399" font-size="11">Метод: courses.map((course) =&gt; &lt;CourseCard key={course.id} {...props} /&gt;)</text>
+  </g>
+
+  <!-- Arrow lines from App to Children -->
+  <!-- Left: AddCourseModal -->
+  <path d="M 330 290 L 330 330 L 150 330 L 150 380" fill="none" stroke="#818cf8" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="180" y="322" fill="#a5b4fc" font-size="11" text-anchor="middle">isOpen, onClose, onAddCourse</text>
+
+  <!-- Center: CourseCard instances -->
+  <path d="M 500 290 L 500 380" fill="none" stroke="#818cf8" stroke-width="2.5" marker-end="url(#arrow)" />
+  <text x="500" y="340" fill="#a5b4fc" font-size="11" text-anchor="middle" font-weight="600">передача props для кожного курсу</text>
+
+  <!-- Callback Arrow from CourseCard to App -->
+  <path d="M 530 380 L 530 310 L 530 295" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowCallback)" />
+  <text x="590" y="340" fill="#38bdf8" font-size="10.5">onToggleEnroll(id)</text>
+
+  <!-- Right: DefensePanel -->
+  <path d="M 670 290 L 670 330 L 850 330 L 850 380" fill="none" stroke="#818cf8" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="800" y="322" fill="#a5b4fc" font-size="11" text-anchor="middle">статичний конспект</text>
+
+  <!-- Component 1: AddCourseModal -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="390" width="230" height="230" rx="12" fill="#131b2e" stroke="#38bdf8" stroke-width="1.5" />
+    <rect x="40" y="390" width="230" height="34" rx="12" fill="#0369a1" />
+    <rect x="40" y="412" width="230" height="12" fill="#0369a1" />
+    <text x="155" y="413" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">
+      &lt;AddCourseModal /&gt;
+    </text>
+
+    <text x="55" y="445" fill="#38bdf8" font-size="11.5" font-weight="bold">Отримані props:</text>
+    <text x="55" y="465" fill="#e2e8f0" font-size="11">• <tspan fill="#a5b4fc">isOpen</tspan>: boolean</text>
+    <text x="55" y="483" fill="#e2e8f0" font-size="11">• <tspan fill="#a5b4fc">onClose</tspan>: function</text>
+    <text x="55" y="501" fill="#e2e8f0" font-size="11">• <tspan fill="#a5b4fc">onAddCourse</tspan>: function</text>
+    
+    <line x1="50" y1="515" x2="260" y2="515" stroke="rgba(255,255,255,0.1)" />
+    
+    <text x="55" y="535" fill="#94a3b8" font-size="10.5" font-weight="bold">Призначення:</text>
+    <text x="55" y="555" fill="#cbd5e1" font-size="10.5">Форма для додавання 4-го</text>
+    <text x="55" y="572" fill="#cbd5e1" font-size="10.5">курсу в стан масиву</text>
+    <text x="55" y="590" fill="#cbd5e1" font-size="10.5">(демонстрація пункту 5.3)</text>
+  </g>
+
+  <!-- Component 2: CourseCard (Main Component of the Lab) -->
+  <g filter="url(#shadow)">
+    <rect x="310" y="390" width="380" height="255" rx="14" fill="url(#cardGrad)" stroke="#6366f1" stroke-width="2" />
+    <rect x="310" y="390" width="380" height="36" rx="14" fill="#4338ca" />
+    <rect x="310" y="414" width="380" height="12" fill="#4338ca" />
+    <text x="500" y="414" fill="#ffffff" font-size="14.5" font-weight="bold" text-anchor="middle">
+      Головний компонент: &lt;CourseCard /&gt;
+    </text>
+
+    <text x="330" y="445" fill="#34d399" font-size="12" font-weight="bold">Обов'язкові props за завданням:</text>
+    <text x="340" y="465" fill="#f8fafc" font-size="11.5">1. <tspan fill="#818cf8" font-weight="bold">title</tspan>: string (Назва курсу)</text>
+    <text x="340" y="483" fill="#f8fafc" font-size="11.5">2. <tspan fill="#818cf8" font-weight="bold">instructor</tspan>: string (Ім'я викладача)</text>
+    <text x="340" y="501" fill="#f8fafc" font-size="11.5">3. <tspan fill="#818cf8" font-weight="bold">duration</tspan>: string (Тривалість курсу)</text>
+    <text x="340" y="519" fill="#f8fafc" font-size="11.5">4. <tspan fill="#818cf8" font-weight="bold">isAvailable</tspan>: boolean (Доступність запису)</text>
+
+    <line x1="325" y1="532" x2="675" y2="532" stroke="rgba(255,255,255,0.12)" />
+
+    <text x="330" y="550" fill="#38bdf8" font-size="11.5" font-weight="bold">Додаткові props (індивідуальне завдання):</text>
+    <text x="340" y="568" fill="#e2e8f0" font-size="11">• <tspan fill="#a5b4fc">isEnrolled</tspan>: boolean (стан запису студента)</text>
+    <text x="340" y="586" fill="#e2e8f0" font-size="11">• <tspan fill="#a5b4fc">onToggleEnroll</tspan>: function (callback для зміни стану)</text>
+    <text x="340" y="604" fill="#e2e8f0" font-size="11">• <tspan fill="#a5b4fc">level, icon, description, onDelete</tspan></text>
+    <text x="340" y="625" fill="#94a3b8" font-size="10.5">Рендериться 3 рази для 3 початкових курсів (DRY-підхід)</text>
+  </g>
+
+  <!-- Component 3: DefensePanel -->
+  <g filter="url(#shadow)">
+    <rect x="730" y="390" width="235" height="230" rx="12" fill="#131b2e" stroke="#8b5cf6" stroke-width="1.5" />
+    <rect x="730" y="390" width="235" height="34" rx="12" fill="#6d28d9" />
+    <rect x="730" y="412" width="235" height="12" fill="#6d28d9" />
+    <text x="847" y="413" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">
+      &lt;DefensePanel /&gt;
+    </text>
+
+    <text x="745" y="445" fill="#c084fc" font-size="11.5" font-weight="bold">Усний захист (Пункт 5):</text>
+    <text x="745" y="468" fill="#e2e8f0" font-size="11">• Питання 1: Принцип DRY</text>
+    <text x="745" y="488" fill="#e2e8f0" font-size="11">• Питання 2: Потік даних props</text>
+    <text x="745" y="508" fill="#e2e8f0" font-size="11">• Питання 3: Додавання 4-го курсу</text>
+
+    <line x1="740" y1="525" x2="955" y2="525" stroke="rgba(255,255,255,0.1)" />
+
+    <text x="745" y="548" fill="#94a3b8" font-size="10.5" font-weight="bold">Особливість:</text>
+    <text x="745" y="568" fill="#cbd5e1" font-size="10.5">Інтерактивний акордеон</text>
+    <text x="745" y="586" fill="#cbd5e1" font-size="10.5">із готовими структурованими</text>
+    <text x="745" y="604" fill="#cbd5e1" font-size="10.5">відповідями для викладача</text>
+  </g>
+</svg>
